@@ -9,7 +9,9 @@ import os
 import sys
 from shutil import rmtree
 
+from os.path import dirname, join
 from setuptools import find_packages, setup, Command
+import multiprocessing
 
 # Package meta-data.
 NAME = 'mypackage'
@@ -92,12 +94,17 @@ class UploadCommand(Command):
         sys.exit()
 
 
+with open('README.rst') as f:
+    readme = f.read()
+
+
 # Where the magic happens:
 setup(
     name=NAME,
     version=about['__version__'],
     description=DESCRIPTION,
-    long_description=long_description,
+    # long_description=long_description,
+    long_description=readme,
     long_description_content_type='text/markdown',
     author=AUTHOR,
     author_email=EMAIL,
@@ -110,8 +117,11 @@ setup(
     # entry_points={
     #     'console_scripts': ['mycli=mymodule:cli'],
     # },
-    install_requires=REQUIRED,
+    # test_suite = 'nose.collector',
+    # tests_require=tests_require,
+    # extras_require={'test': tests_require},
     extras_require=EXTRAS,
+    install_requires=REQUIRED,
     include_package_data=True,
     license='MIT',
     classifiers=[
