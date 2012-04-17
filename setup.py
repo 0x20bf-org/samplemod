@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 # Note: To use the 'upload' functionality of this file, you must:
 #   $ pipenv install twine --dev
 
@@ -9,9 +8,9 @@ import os
 import sys
 from shutil import rmtree
 
-from os.path import dirname, join
+# from os.path import dirname, join
 from setuptools import find_packages, setup, Command
-import multiprocessing
+# import multiprocessing
 
 # Package meta-data.
 NAME = 'mypackage'
@@ -98,6 +97,10 @@ with open('README.rst') as f:
     readme = f.read()
 
 
+with open('LICENSE') as f:
+    license = f.read()
+
+
 # Where the magic happens:
 setup(
     name=NAME,
@@ -114,16 +117,15 @@ setup(
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['mypackage'],
 
-    # entry_points={
-    #     'console_scripts': ['mycli=mymodule:cli'],
-    # },
+    entry_points={
+        'console_scripts': ['mycli=mymodule:cli'],
+    },
     # test_suite = 'nose.collector',
     # tests_require=tests_require,
-    # extras_require={'test': tests_require},
     extras_require=EXTRAS,
     install_requires=REQUIRED,
     include_package_data=True,
-    license='MIT',
+    license=license,
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -137,5 +139,5 @@ setup(
     # $ setup.py publish support.
     cmdclass={
         'upload': UploadCommand,
-    },
+    }
 )
